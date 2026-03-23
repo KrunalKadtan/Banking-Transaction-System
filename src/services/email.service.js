@@ -46,6 +46,15 @@ async function sendRegistrationEmail (userEmail, name) {
   await sendEmail(userEmail, subject, text, html);
 }
 
+async function sendLoginEmail (userEmail, name) {
+  const subject = "Login to Banking Transaction System";
+  const text = `Hello ${name},\n\nYou have recently login into Banking Transaction System. We're excited to have you on board!\n\nBest Regards,\nThe Banking Transaction System Team`;
+  const html = `<p>Hello ${name},</p><p>You have recently login into Banking Transaction System. We're excited to have you on board!</p><p>Best Regards,<br>The Banking Transaction System Team</p>`;
+
+  await sendEmail(userEmail, subject, text, html);
+}
+
 module.exports = {
-  sendRegistrationEmail
+  sendRegistrationEmail,
+  sendLoginEmail
 };
