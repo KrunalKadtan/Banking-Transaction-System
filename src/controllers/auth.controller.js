@@ -87,7 +87,7 @@ async function userLoginController (req, res) {
   })
 
 
-  await emailService.sendLoginEmail(user.email, user.name);
+  // await emailService.sendLoginEmail(user.email, user.name);
 }
 
 module.exports = { 
