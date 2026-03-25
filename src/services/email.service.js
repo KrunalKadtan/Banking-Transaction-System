@@ -38,7 +38,7 @@ const sendEmail = async (to, subject, text, html) => {
   }
 };
 
-async function sendRegistrationEmail (userEmail, name) {
+async function sendRegistrationEmail(userEmail, name) {
   const subject = "Welcome to Banking Transaction System";
   const text = `Hello ${name},\n\nThank you for  registering at Banking Transaction System. We're excited to have you on board!\n\nBest Regards,\nThe Banking Transaction System Team`;
   const html = `<p>Hello ${name},</p><p>Thank you for  registering at Banking Transaction System. We're excited to have you on board!</p><p>Best Regards,<br>The Banking Transaction System Team</p>`;
@@ -46,7 +46,7 @@ async function sendRegistrationEmail (userEmail, name) {
   await sendEmail(userEmail, subject, text, html);
 }
 
-async function sendLoginEmail (userEmail, name) {
+async function sendLoginEmail(userEmail, name) {
   const subject = "Login to Banking Transaction System";
   const text = `Hello ${name},\n\nYou have recently login into Banking Transaction System. We're excited to have you on board!\n\nBest Regards,\nThe Banking Transaction System Team`;
   const html = `<p>Hello ${name},</p><p>You have recently login into Banking Transaction System. We're excited to have you on board!</p><p>Best Regards,<br>The Banking Transaction System Team</p>`;
@@ -54,7 +54,25 @@ async function sendLoginEmail (userEmail, name) {
   await sendEmail(userEmail, subject, text, html);
 }
 
+async function sendTransactionEmail(userEmail, name, amount, toAccount) {
+  const subject = "Transaction Successful!"
+  const text = `Hello ${name},\n\nYour transaction of $${amount} to account ${toAccount} was Successful.\n\nBest regards.`
+  const html = `<p>Hello ${name},</p><p>Your transaction of $${amount} to account ${toAccount} was Successful.</p><p>Best regards.</p>`
+
+  await sendEmail(userEmail, subject, text, html)
+}
+
+async function sendTransactionFailureEmail(userEmail, name, amount, toAccount) {
+  const subject = "Transaction Failed"
+  const text = `Hello ${name},\n\nWe regret to inform you that your transaction of $${amount} to account ${toAccount} was unsuccessful.`
+  const html = `<p>Hello ${name},</p><p>We regret to inform you that your transaction of $${amount} to account ${toAccount} was unsuccessful.</p>`
+
+  await sendEmail(userEmail, subject, text, html)
+}
+
 module.exports = {
   sendRegistrationEmail,
-  sendLoginEmail
+  sendLoginEmail,
+  sendTransactionEmail,
+  sendTransactionFailureEmail
 };

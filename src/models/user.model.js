@@ -1,4 +1,4 @@
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
@@ -21,12 +21,18 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required for creating an account"],
     minlength: [6, "Password should contain more than 6 characters"],
     select: false
+  },
+  systemUser: {
+    type: Boolean,
+    default: false,
+    immutable: true,
+    select: false
   }
 }, {
-    timestamps: true
+  timestamps: true
 })
 
-userSchema.pre("save", async function() {
+userSchema.pre("save", async function () {
   if (!this.isModified("password")) {
     return
   }
@@ -37,7 +43,7 @@ userSchema.pre("save", async function() {
   return
 })
 
-userSchema.methods.comparePassword = async function(password) {
+userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 }
 
